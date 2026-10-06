@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Append-only race event log. Anyone with the (unguessable) race id can read and add entries;
+    // nothing can ever be edited or deleted. serverTs must be the server's clock.
+    match /races/{raceId}/events/{eventId} {
+      allow read: if raceId.size() >= 20;
+      allow create: if raceId.size() >= 20
+        && request.resource.data.keys().hasOnly(['id', 'v', 'ts', 'seenTs', 'deviceId', 'by', 'type', 'payload', 'serverTs'])
+        && request.resource.data.id == eventId
+        && request.resource.data.type is string && request.resource.data.type.size() < 40
+        && request.resource.data.payload is map
+        && request.resource.data.serverTs == request.time;
+      allow update, delete: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+dev-dist
+.env
+.env.*
+*.local
+test-results
+shots
+dist-test
+docs/race-info/

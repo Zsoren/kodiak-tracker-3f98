@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+        env:
+          # BASE_PATH repo variable is set to "/" once kodiak.zanesorenson.com is live; until then the preview uses the project path.
+          BASE_PATH: ${{ vars.BASE_PATH || format('/{0}/', github.event.repository.name) }}
+          # Zane adds the Firebase web config as a repository SECRET (Settings → Secrets and variables → Actions).
+          VITE_FIREBASE_CONFIG: ${{ secrets.VITE_FIREBASE_CONFIG || vars.VITE_FIREBASE_CONFIG }}
+          # Set to "0" to switch off live updates on crew phones (refresh-only).
+          VITE_LIVE: ${{ vars.VITE_LIVE }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
