@@ -10,7 +10,7 @@ export interface Station {
   /** 2–3 letter code for timeline chips */
   code: string
   mile: number
-  /** the leg from here to the next station */
+  /** the leg from here to the next station (official chart "miles to next aid" column) */
   nextMi?: number
   gain?: number
   loss?: number
@@ -51,17 +51,17 @@ export const RACES: Record<RaceId, Race> = {
     name: '100K',
     start: pt(10, 6, 0),
     stations: [
-      { id: 'start', name: 'Start', code: 'ST', mile: 0, nextMi: 4.9, gain: 818, loss: 483, crew: false, crewNote: 'Spectators only (no crew help). Village parking 4–11 AM Sat only.', lot: 'village', leadMin: 10, dropBag: true },
-      { id: 'bm1', name: 'Bear Mountain 1', code: 'BM1', mile: 4.9, nextMi: 5.5, gain: 778, loss: 637, crew: false, crewNote: 'No crew or spectators allowed.', dropBag: false },
+      { id: 'start', name: 'Start', code: 'ST', mile: 0, nextMi: 4.8, gain: 818, loss: 483, crew: false, crewNote: 'Spectators only (no crew help). Village parking 4–11 AM Sat only.', lot: 'village', leadMin: 10, dropBag: true },
+      { id: 'bm1', name: 'Bear Mountain 1', code: 'BM1', mile: 4.9, nextMi: 5.6, gain: 778, loss: 637, crew: false, crewNote: 'No crew or spectators allowed.', dropBag: false },
       { id: 'sl1', name: 'Sugarloaf 1', code: 'SL1', mile: 10.4, nextMi: 8.7, gain: 3075, loss: 1663, cutoff: pt(10, 9, 30), crew: true, crewNote: SUGARLOAF_NOTE, lot: 'bear', leadMin: 60, shuttle: true, dropBag: true },
-      { id: 'bh', name: 'Balky Horse', code: 'BH', mile: 19.1, nextMi: 5.1, gain: 22, loss: 1435, crew: false, dropBag: false },
-      { id: 'sl2', name: 'Sugarloaf 2', code: 'SL2', mile: 24.2, nextMi: 6.1, gain: 682, loss: 826, cutoff: pt(10, 14, 0), crew: true, crewNote: SUGARLOAF_NOTE, lot: 'bear', leadMin: 60, shuttle: true, dropBag: true },
+      { id: 'bh', name: 'Balky Horse', code: 'BH', mile: 19.1, nextMi: 5.0, gain: 22, loss: 1435, crew: false, dropBag: false },
+      { id: 'sl2', name: 'Sugarloaf 2', code: 'SL2', mile: 24.2, nextMi: 6.2, gain: 682, loss: 826, cutoff: pt(10, 14, 0), crew: true, crewNote: SUGARLOAF_NOTE, lot: 'bear', leadMin: 60, shuttle: true, dropBag: true },
       { id: 'bm2', name: 'Bear Mountain 2', code: 'BM2', mile: 30.3, nextMi: 6.4, gain: 1821, loss: 825, cutoff: pt(10, 16, 0), crew: true, crewNote: 'Park at the Bear Mountain lot (43101 Goldmine Dr); the aid station is right there.', lot: 'bear', leadMin: 10, dropBag: false },
       { id: 'ss', name: 'Snow Summit', code: 'SS', mile: 36.7, nextMi: 4.2, gain: 327, loss: 841, crew: true, crewNote: SNOW_NOTE, lot: 'snow', leadMin: 10, dropBag: false },
       { id: 'hg', name: 'Hydration-Grandview', code: 'HG', mile: 40.9, nextMi: 5.3, gain: 731, loss: 730, crew: false, tag: 'self-serve water', dropBag: false },
       { id: 'bl', name: 'Bluff Lake', code: 'BL', mile: 46.2, nextMi: 5.4, gain: 646, loss: 747, cutoff: pt(10, 21, 0), crew: false, dropBag: false },
       { id: 'co', name: 'Camp Osito', code: 'CO', mile: 51.6, nextMi: 3.7, gain: 259, loss: 916, cutoff: pt(10, 22, 45), crew: false, dropBag: true },
-      { id: 'ag', name: 'Aspen Glen', code: 'AG', mile: 55.3, nextMi: 7.5, gain: 1154, loss: 1209, cutoff: pt(11, 0, 0), crew: true, crewNote: ASPEN_NOTE, lot: 'snow', leadMin: 60, shuttle: true, dropBag: false },
+      { id: 'ag', name: 'Aspen Glen', code: 'AG', mile: 55.3, nextMi: 7.6, gain: 1154, loss: 1209, cutoff: pt(11, 0, 0), crew: true, crewNote: ASPEN_NOTE, lot: 'snow', leadMin: 60, shuttle: true, dropBag: false },
       { id: 'fin', name: 'Finish', code: 'FIN', mile: 62.8, cutoff: pt(11, 2, 15), crew: true, crewNote: FINISH_NOTE, lot: 'snow', leadMin: 30, shuttle: true, dropBag: true },
     ],
   },
@@ -75,7 +75,7 @@ export const RACES: Record<RaceId, Race> = {
       { id: 'hg', name: 'Hydration-Grandview', code: 'HG', mile: 9.5, nextMi: 4.3, gain: 455, loss: 448, crew: false, tag: 'self-serve water', dropBag: false },
       { id: 'bl', name: 'Bluff Lake', code: 'BL', mile: 13.8, nextMi: 5.4, gain: 648, loss: 750, crew: false, dropBag: false },
       { id: 'co', name: 'Camp Osito', code: 'CO', mile: 19.2, nextMi: 3.6, gain: 259, loss: 915, cutoff: pt(10, 14, 0), crew: false, dropBag: false },
-      { id: 'ag', name: 'Aspen Glen', code: 'AG', mile: 22.8, nextMi: 7.6, gain: 1143, loss: 1205, crew: true, crewNote: ASPEN_NOTE, lot: 'snow', leadMin: 60, shuttle: true, dropBag: false },
+      { id: 'ag', name: 'Aspen Glen', code: 'AG', mile: 22.8, nextMi: 7.5, gain: 1143, loss: 1205, crew: true, crewNote: ASPEN_NOTE, lot: 'snow', leadMin: 60, shuttle: true, dropBag: false },
       { id: 'fin', name: 'Finish', code: 'FIN', mile: 30.4, cutoff: pt(10, 17, 30), crew: true, crewNote: FINISH_NOTE, lot: 'snow', leadMin: 30, shuttle: true, dropBag: true },
     ],
   },
