@@ -1,4 +1,19 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+
+// The math tests use their own fixed plan (Zane's original sheet times; others blank), so updating the
+// real plans in src/data/plans.ts never changes what these tests check.
+vi.mock('../data/plans', async () => {
+  const { pt } = await import('../data/course')
+  return {
+    SEED_PLANS: {
+      zane: {
+        start: pt(10, 6, 0), bm1: pt(10, 6, 59), sl1: pt(10, 8, 10), bh: pt(10, 11, 4), sl2: pt(10, 12, 8), bm2: pt(10, 13, 44),
+        ss: pt(10, 16, 6), hg: pt(10, 17, 42), bl: pt(10, 19, 49), co: pt(10, 21, 44), ag: pt(10, 23, 12), fin: pt(11, 2, 0),
+      },
+      john: {}, kevy: {}, ryan: {},
+    },
+  }
+})
 import { pt, RACES } from '../data/course'
 import { makeEvent, reduce, type EventType, type KEvent } from './events'
 import { projectRunner, projectAll, upcomingMeetings, openAsks, askTarget, askTargetAfter, askMeetingMoved, planFromGoal } from './projection'

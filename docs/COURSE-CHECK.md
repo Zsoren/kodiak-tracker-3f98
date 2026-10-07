@@ -42,19 +42,34 @@ Planned arrival, and how much time that leaves before the cut-off (runners must 
 | Station | Planned arrival | Before cut-off |
 |---|---|---|
 | Start | 6:00 AM |  |
-| Bear Mountain 1 | 6:59 AM |  |
-| Sugarloaf 1 | 8:10 AM | 1h 20m |
-| Balky Horse | 11:04 AM |  |
-| Sugarloaf 2 | 12:08 PM | 1h 52m |
-| Bear Mountain 2 | 1:44 PM | 2h 16m |
-| Snow Summit | 4:06 PM |  |
-| Hydration-Grandview | 5:42 PM |  |
-| Bluff Lake | 7:49 PM | 1h 11m |
-| Camp Osito | 9:44 PM | 1h 01m |
-| Aspen Glen | 11:12 PM | **48 min** |
+| Bear Mountain 1 | 7:03 AM |  |
+| Sugarloaf 1 | 8:18 AM | 1h 12m |
+| Balky Horse | 11:13 AM |  |
+| Sugarloaf 2 | 12:17 PM | 1h 43m |
+| Bear Mountain 2 | 1:55 PM | 2h 05m |
+| Snow Summit | 4:20 PM |  |
+| Hydration-Grandview | 5:52 PM |  |
+| Bluff Lake | 7:54 PM | 1h 06m |
+| Camp Osito | 9:49 PM | **56 min** |
+| Aspen Glen | 11:17 PM | **43 min** |
 | Finish | Sun 2:00 AM | **15 min** |
 
-**John** (100K): no times yet — enter them in the app (Plans tab).
+**John** (100K)
+
+| Station | Planned arrival | Before cut-off |
+|---|---|---|
+| Start | 6:00 AM |  |
+| Bear Mountain 1 | 6:49 AM |  |
+| Sugarloaf 1 | 7:48 AM | 1h 42m |
+| Balky Horse | 10:26 AM |  |
+| Sugarloaf 2 | 11:22 AM | 2h 38m |
+| Bear Mountain 2 | 12:42 PM | 3h 18m |
+| Snow Summit | 2:32 PM |  |
+| Hydration-Grandview | 3:28 PM |  |
+| Bluff Lake | 4:46 PM | 4h 14m |
+| Camp Osito | 6:04 PM | 4h 41m |
+| Aspen Glen | 6:56 PM | 5h 04m |
+| Finish | 9:00 PM | 5h 15m |
 
 **Kevy** (100K)
 

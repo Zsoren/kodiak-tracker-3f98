@@ -16,7 +16,8 @@
     "test:hidden": "node scripts/hidden-test.mjs",
     "test:noscroll": "node scripts/noscroll.mjs",
     "test:contrast": "node scripts/axe-check.mjs",
-    "course-table": "node scripts/course-table.ts > docs/COURSE-CHECK.md"
+    "course-table": "node scripts/course-table.ts > docs/COURSE-CHECK.md",
+    "check-plans": "node scripts/check-plans.ts"
   },
   "dependencies": {
     "firebase": "^12.18.0",
