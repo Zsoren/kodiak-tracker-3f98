@@ -26,6 +26,8 @@ export interface Settings {
   /** runner phones: optional number per crew name (stays on this phone) */
   crewPhones: Record<string, string>
   installDismissed: boolean
+  /** the app is on this phone's home screen (from Chrome) */
+  installed: boolean
   /** runner phone temporarily showing the crew screens */
   crewView: boolean
 }
@@ -46,6 +48,8 @@ export interface Flags {
   offlineReady: boolean
   noSW: boolean
   updateReady: boolean
+  /** Chrome offered an install prompt */
+  canInstall: boolean
 }
 
 export interface Snapshot {
@@ -72,7 +76,7 @@ class Store {
   private events: KEvent[] = []
   private synced = new Set<string>()
   private sync: SyncStatus = { mode: 'off', online: typeof navigator !== 'undefined' ? navigator.onLine : true, syncing: false, lastPulled: null, error: null, live: false }
-  private flags: Flags = { offlineReady: false, noSW: false, updateReady: false }
+  private flags: Flags = { offlineReady: false, noSW: false, updateReady: false, canInstall: false }
   private listeners = new Set<Listener>()
   private localListeners = new Set<(events: KEvent[]) => void>()
   private resetListeners = new Set<() => void>()
@@ -81,7 +85,7 @@ class Store {
   constructor() {
     const def: Settings = {
       deviceId: newId(), role: null, me: null, name: '', testMode: false, timeOffsetMs: 0,
-      crewChief: '', crewPhones: {}, installDismissed: false, crewView: false,
+      crewChief: '', crewPhones: {}, installDismissed: false, installed: false, crewView: false,
     }
     this.settings = { ...def, ...loadJSON<Partial<Settings>>(SETTINGS_KEY, {}) }
     if (!this.settings.testMode) this.settings.timeOffsetMs = 0
@@ -200,8 +204,11 @@ class Store {
   }
 
   setSettings(patch: Partial<Settings>) {
+    const s = this.settings as unknown as Record<string, unknown>
+    if (Object.entries(patch).every(([k, v]) => s[k] === v)) return   // nothing changed: don't write
     const before = this.dataKey
-    this.settings = { ...this.settings, ...patch }
+    // Merge with what's saved, so a stale copy of the app (another tab, the installed app vs Chrome) never wipes newer settings.
+    this.settings = { ...this.settings, ...loadJSON<Partial<Settings>>(SETTINGS_KEY, {}), ...patch }
     if (!this.settings.testMode) this.settings.timeOffsetMs = 0
     saveJSON(SETTINGS_KEY, this.settings)
     if (this.dataKey !== before) { this.loadData(); for (const l of this.resetListeners) l() }

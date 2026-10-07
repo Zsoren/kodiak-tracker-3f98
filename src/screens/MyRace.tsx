@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { store, type Snapshot } from '../state/store'
 import { askTargetAfter, type RunnerProj, type StationProj } from '../model/projection'
 import { aheadBehind, fmtSpare, fmtT } from '../model/time'
@@ -12,7 +12,7 @@ import { fmtAgo, fmtClock } from '../model/time'
 interface Logged { ids: string[]; station: string; at: number; askId: string | null; body: string; duplicate: boolean }
 
 /** Runner view. Never scrolls; the buttons are pinned to the bottom thumb zone. */
-export function MyRace({ snap, runnerId }: { snap: Snapshot; runnerId: string }) {
+export function MyRace({ snap, runnerId, banner }: { snap: Snapshot; runnerId: string; banner?: ReactNode }) {
   const p = snap.projs.find(x => x.runnerId === runnerId)!
   const [confirm, setConfirm] = useState<StationProj | null>(null)
   const [pickOther, setPickOther] = useState(false)
@@ -27,6 +27,7 @@ export function MyRace({ snap, runnerId }: { snap: Snapshot; runnerId: string })
 
   return (
     <div className="myrace">
+      {banner}
       <div className="mr-top">
         <div className="mr-head">
           <span className="grow ellip">Kodiak {p.race.name} · <b style={{ color: '#fff' }}>{p.name}</b></span>

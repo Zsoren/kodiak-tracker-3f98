@@ -4,7 +4,10 @@ import App from './App'
 import { store } from './state/store'
 import { startSync } from './sync'
 import { startPWA } from './pwa'
+import { startInstall } from './install'
 import './styles.css'
+
+startInstall()   // before rendering, so Chrome's install prompt is never missed
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -33,7 +33,6 @@ for (const [runner, plan] of Object.entries(SEED_PLANS)) {
   }
   lines.push('')
 }
-lines.push("Kevy's sheet said Finish **2:03 PM** — read as **Sun 2:03 AM** (after Aspen Glen 11:28 PM). Ryan's sheet said Aspen Glen **12:26 AM** — read as **12:26 PM** (between Camp Osito and the Finish).", '')
 lines.push('## Crew lots', '')
 for (const l of LOTS) { lines.push(`**${l.name}** — ${l.address}  `, `Serves: ${l.serves}`, ...l.notes.map(n => `- ${n}`), '') }
 lines.push('## Crew rules shown in the app', '', ...CREW_RULES.map(r => `- ${r}`), '')

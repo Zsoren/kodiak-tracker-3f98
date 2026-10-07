@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { store, type Snapshot } from '../state/store'
 import { RUNNERS, runnerById } from '../data/course'
-import { isInAppBrowser, isIOS, isPreviewHost, isStandalone } from '../state/hooks'
+import { isIOS, isPreviewHost, isStandalone } from '../state/hooks'
 import { go } from '../state/router'
 
 /** First run: I'm running / I'm crew → name → install steps → done once "Ready offline". */
@@ -22,19 +22,12 @@ export function FirstRun({ snap }: { snap: Snapshot }) {
     return (
       <div className="page">
         <h1 className="title">{role === 'runner' ? `This phone opens to ${runnerById(runner)?.name}'s race` : `Hi ${name.trim()}`}</h1>
-        {showInstall && isInAppBrowser() && <div className="warnbox">This link opened inside another app. Open it in {isIOS() ? 'Safari' : 'Chrome'} to add it to your home screen.</div>}
-        {showInstall && (
-          <div className="card">
-            <div className="bold">Add it to your home screen</div>
-            {isIOS()
-              ? <ol className="small"><li>In <b>Safari</b>, tap <b>Share ⬆</b></li><li>Tap <b>Add to Home Screen</b></li><li>Open Kodiak from the new icon and set up who you are there (Safari and the icon keep separate data).</li></ol>
-              : <ol className="small"><li>In <b>Chrome</b>, tap <b>⋮</b></li><li>Tap <b>Install app</b> (or <b>Add to Home screen</b>)</li><li>Open Kodiak from the new icon.</li></ol>}
-          </div>
-        )}
+        {showInstall && isIOS() && <div className="infobox">iPhone: Safari and the home-screen icon keep separate data. After adding it to your home screen, open Kodiak from the icon and pick who you are again there.</div>}
+        {showInstall && !isIOS() && <div className="infobox">Use the <b>Install app</b> button at the top — your choice here carries over to the home-screen app.</div>}
         {isPreviewHost() && <div className="infobox">This is a <b>preview</b> — please don't install it. The real one will be at kodiak.zanesorenson.com.</div>}
         <div className="card" style={{ marginTop: 10 }}>
           {snap.flags.offlineReady
-            ? <div className="bold">✓ Ready offline — the app is saved on this phone.</div>
+            ? <div className="bold">✓ Ready offline — the app is saved on this phone and works without signal.</div>
             : snap.flags.noSW ? <div className="amber">This browser can't save the app for offline use.</div>
               : <div className="amber">Saving the app for offline use… keep this open on Wi-Fi for a moment.</div>}
         </div>

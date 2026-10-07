@@ -85,8 +85,6 @@ Planned arrival, and how much time that leaves before the cut-off (runners must 
 | Aspen Glen | 12:26 PM |  |
 | Finish | 2:00 PM | 3h 30m |
 
-Kevy's sheet said Finish **2:03 PM** — read as **Sun 2:03 AM** (after Aspen Glen 11:28 PM). Ryan's sheet said Aspen Glen **12:26 AM** — read as **12:26 PM** (between Camp Osito and the Finish).
-
 ## Crew lots
 
 **Bear Mountain lot** — 43101 Goldmine Dr, Big Bear Lake, CA 92315  

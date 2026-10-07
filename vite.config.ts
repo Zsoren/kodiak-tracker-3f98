@@ -27,6 +27,8 @@ export default defineConfig({
         orientation: 'portrait',
         background_color: '#000000',
         theme_color: '#000000',
+        // lets Android Chrome tell the app whether it's already installed (navigator.getInstalledRelatedApps)
+        related_applications: [{ platform: 'webapp', url: (process.env.SITE_URL ?? 'https://kodiak.zanesorenson.com') + '/manifest.webmanifest' }],
         icons: [
           { src: 'icon-192.png', sizes: '192x192', type: 'image/png' },
           { src: 'icon-512.png', sizes: '512x512', type: 'image/png' },

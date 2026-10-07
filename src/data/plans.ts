@@ -21,7 +21,7 @@ export const SEED_PLANS: Record<string, Record<string, number>> = {
     fin: pt(11, 2, 0),
   },
   john: {},
-  // Kevy (sheet updated Oct 6). The sheet's Finish "2:03 PM" is read as Sun 2:03 AM (first time after Aspen Glen).
+  // Kevy (Runner Plans tab, updated Oct 6)
   kevy: {
     start: pt(10, 6, 0),
     bm1: pt(10, 7, 20),
@@ -36,7 +36,7 @@ export const SEED_PLANS: Record<string, Record<string, number>> = {
     ag: pt(10, 23, 28),
     fin: pt(11, 2, 3),
   },
-  // Ryan, 50K (sheet updated Oct 6). The sheet's Aspen Glen "12:26 AM" is read as 12:26 PM (between Camp Osito and the Finish).
+  // Ryan, 50K (Runner Plans tab, updated Oct 6)
   ryan: {
     start: pt(10, 7, 30),
     ss: pt(10, 8, 58),

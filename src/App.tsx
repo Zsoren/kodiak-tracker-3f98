@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useStore, useStandalone, isIOS, isPreviewHost } from './state/hooks'
+import { useEffect } from 'react'
+import { useStore, isPreviewHost } from './state/hooks'
 import { useRoute, go } from './state/router'
 import { store } from './state/store'
 import { FirstRun } from './screens/FirstRun'
@@ -11,22 +11,14 @@ import { Plans } from './screens/Plans'
 import { More } from './screens/More'
 import { RunnerDetail } from './screens/RunnerDetail'
 import { applyUpdate } from './pwa'
-
-interface BeforeInstallPromptEvent extends Event { prompt: () => Promise<void> }
+import { InstallBanner } from './components/InstallBanner'
 
 export default function App() {
   const snap = useStore()
   const route = useRoute()
-  const standalone = useStandalone()
-  const [installEvt, setInstallEvt] = useState<BeforeInstallPromptEvent | null>(null)
   const { settings, flags } = snap
   useEffect(() => { document.documentElement.classList.toggle('test', settings.testMode) }, [settings.testMode])
 
-  useEffect(() => {
-    const onBip = (e: Event) => { e.preventDefault(); if (!isPreviewHost()) setInstallEvt(e as BeforeInstallPromptEvent) }
-    window.addEventListener('beforeinstallprompt', onBip)
-    return () => window.removeEventListener('beforeinstallprompt', onBip)
-  }, [])
   // Every screen change starts at the top.
   const routeKey = JSON.stringify(route)
   useEffect(() => { if (route.tab !== 'timeline') window.scrollTo({ top: 0, left: 0 }) }, [routeKey, route.tab])
@@ -40,23 +32,16 @@ export default function App() {
     </>
   )
 
-  if (!settings.role) return <div className="app">{top}<FirstRun snap={snap} /></div>
+  if (!settings.role) return <div className="app">{top}<div style={{ padding: '8px 12px 0' }}><InstallBanner snap={snap} /></div><FirstRun snap={snap} /></div>
 
   const runnerHome = settings.role === 'runner' && !settings.crewView
-  if (runnerHome && settings.me) return <div className="app">{top}<MyRace snap={snap} runnerId={settings.me} /></div>
+  if (runnerHome && settings.me) return <div className="app">{top}<MyRace snap={snap} runnerId={settings.me} banner={<InstallBanner snap={snap} compact />} /></div>
 
   const tab = route.tab === 'default' || route.tab === 'me' ? 'crew' : route.tab
-  const showInstall = !standalone && !settings.installDismissed && !isPreviewHost() && (isIOS() || installEvt)
   return (
     <div className="app tabs">
       {top}
-      {showInstall && (
-        <div className="banner" style={{ margin: '8px 12px 0' }}>
-          <span className="grow small">{isIOS() ? <>Add to your home screen: tap Share <b>⬆</b> → <b>Add to Home Screen</b>, then open it from the icon.</> : <>Install this app for an offline copy and a home-screen icon.</>}</span>
-          {installEvt && <button onClick={() => installEvt.prompt()}>Install</button>}
-          <button className="plain" onClick={() => store.setSettings({ installDismissed: true })}>Not now</button>
-        </div>
-      )}
+      <div style={{ padding: '8px 12px 0' }}><InstallBanner snap={snap} /></div>
       {settings.role === 'runner' && (
         <div className="banner" style={{ margin: '8px 12px 0' }}><span className="grow small">Crew view</span><button onClick={() => { store.setSettings({ crewView: false }); go('me') }}>Back to My Race</button></div>
       )}
