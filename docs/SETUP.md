@@ -2,14 +2,14 @@
 
 Do these in order whenever you're back at the computer. Nothing here needs to be pasted into chat.
 
-## 1. Cloudflare: the web address (do this FIRST — the security certificate can take a few hours)
+## 1. Cloudflare: the web address — ✅ done Oct 6 (https://kodiak.zanesorenson.com live, HTTPS enforced)
 
 1. Log in to Cloudflare → **zanesorenson.com** → **DNS** → **Records** → **Add record**.
 2. Type **CNAME** · Name **`kodiak`** · Target **`zsoren.github.io`**.
 3. Make sure the cloud icon is **grey ("DNS only")**, not orange. (Same as `h2c`. With the orange proxy on, GitHub can't issue the HTTPS certificate.)
 4. **Save**, then tell me "Cloudflare done" — I'll point GitHub at kodiak.zanesorenson.com and turn on HTTPS.
 
-## 2. Firebase: the shared database (same steps as H2C, new project)
+## 2. Firebase: the shared database — ✅ done Oct 6
 
 1. Go to https://console.firebase.google.com → **Create a project**.
    - Name: `kodiak-tracker`. Turn **off** Google Analytics. Create.
