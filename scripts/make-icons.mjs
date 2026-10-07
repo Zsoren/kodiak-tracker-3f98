@@ -36,13 +36,13 @@ function png(size, pixel) {
   return Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), chunk('IHDR', ihdr), chunk('IDAT', zlib.deflateSync(raw)), chunk('IEND', Buffer.alloc(0))])
 }
 
-function render(size, { padding = 0 } = {}) {
+function render(size, { padding = 0, scale = 0.5 } = {}) {
   const AMBER = [255, 179, 0], BLACK = [0, 0, 0]
   const text = 'K'
   const cols = text.length * 5 + (text.length - 1) * 1   
   const rows = 7
   const inner = size - padding * 2
-  const cell = Math.floor((inner * 0.5) / cols)
+  const cell = Math.floor((inner * scale) / cols)
   const w = cell * cols, h = cell * rows
   const ox = Math.floor((size - w) / 2), oy = Math.floor((size - h) / 2)
   return png(size, (x, y) => {
@@ -58,6 +58,7 @@ function render(size, { padding = 0 } = {}) {
 fs.mkdirSync('public', { recursive: true })
 fs.writeFileSync('public/icon-192.png', render(192))
 fs.writeFileSync('public/icon-512.png', render(512))
-fs.writeFileSync('public/icon-maskable-512.png', render(512))
+// maskable: Android crops to a circle (safe zone = central 80%), so the K is drawn smaller
+fs.writeFileSync('public/icon-maskable-512.png', render(512, { scale: 0.32 }))
 fs.writeFileSync('public/apple-touch-icon.png', render(180))
 console.log('icons written')
