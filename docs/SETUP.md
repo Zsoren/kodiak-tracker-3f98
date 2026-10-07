@@ -21,7 +21,7 @@ Do these in order whenever you're back at the computer. Nothing here needs to be
    - Nickname `kodiak`. Leave "Firebase Hosting" unchecked. **Register app**.
    - Copy the whole `const firebaseConfig = { … };` block it shows.
 
-## 3. GitHub: hand the Firebase config to the build
+## 3. GitHub: hand the Firebase config to the build — ✅ done Oct 6 (sharing live; two-phone test passed)
 
 1. Open https://github.com/Zsoren/kodiak-tracker-3f98/settings/secrets/actions
 2. **New repository secret** → Name: `VITE_FIREBASE_CONFIG` → Secret: paste the block → **Add secret**.
@@ -29,7 +29,7 @@ Do these in order whenever you're back at the computer. Nothing here needs to be
 
 (The config is the kind of key that ships inside every website anyway; the Firestore rules you published are what protect the data. It never appears in a chat or terminal.)
 
-## 4. Check the course table (5 min)
+## 4. Course table — ✅ checked against the official charts by Claude (Oct 6)
 
 Open [`docs/COURSE-CHECK.md`](COURSE-CHECK.md) and confirm every station, mile, cut-off and crew note. Wrong cut-offs are worse than no app — tell me anything that's off.
 
